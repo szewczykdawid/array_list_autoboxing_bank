@@ -1,0 +1,26 @@
+package com.szewczyk;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Bank kbcBank = Bank.createBank("KBC Bank");
+        kbcBank.addNewBranch("Dublin Grand Canal");
+        kbcBank.addNewBranch("Dublin Grand Canal");
+
+
+        kbcBank.getBranchClass("Dublin Grand Canal").addNewCustomer("Dawid S.");
+        kbcBank.getBranchClass("Dublin Grand Canal").addNewCustomer("Natalia F.");
+        kbcBank.getBranchClass("Dublin Grand Canal").addNewCustomer("Natalia F.");
+        kbcBank.getBranchClass("Dublin Grand Canal").executeTransaction("Dawid S.",6500);
+        kbcBank.getBranchClass("Dublin Grand Canal").executeTransaction("Dawid S.",300);
+        kbcBank.getBranchClass("Dublin Grand Canal").executeTransaction("Dawid S.",99.9);
+        kbcBank.getBranchClass("Dublin Grand Canal").executeTransaction("Natalia F.",65020);
+        kbcBank.getBranchClass("Dublin Grand Canal").executeTransaction("Natalia F.",20);
+        kbcBank.getBranchClass("Dublin Grand Canal").executeTransaction("Natalia F.",120);
+
+        kbcBank.getBranchClass("Dublin Grand Canal").printListOfCustomer("Dublin Grand Canal");
+        kbcBank.getBranchClass("Dublin Grand Canal").getCustomerClass("Dawid S.").printListOfTransaction();
+        System.out.println("--------------------------------------");
+        kbcBank.getBranchClass("Dublin Grand Canal").printCustomerWithTransations();
+    }}
