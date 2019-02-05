@@ -1,0 +1,91 @@
+package com.szewczyk;
+import java.util.ArrayList;
+
+public class Branch {
+
+    private String branchName;
+    private ArrayList<Customer> arrayListCustomers;
+
+    public Branch(String branchName) {
+        this.branchName = branchName;
+        this.arrayListCustomers = new ArrayList<Customer>();
+    }
+
+    public void printListOfCustomer(String branchName){
+
+        for(int i=0; i<arrayListCustomers.size(); i++){
+            System.out.println("No. " + (i+1) + " CUSTOMER: " + arrayListCustomers.get(i).getCustomerName());
+        }
+
+    }
+
+    public Customer getCustomerClass(String customerName){
+
+        for(int i=0; i < arrayListCustomers.size(); i++){
+            if(arrayListCustomers.get(i).getCustomerName() == customerName){
+                return arrayListCustomers.get(i);
+            }
+        }
+        return null;
+
+    }
+
+    public void printCustomerWithTransations(){
+
+        ArrayList<Customer> customersOfBranch= getArrayListCustomers();
+        for(int i=0; i < customersOfBranch.size(); i++){
+            Customer customerOfBranch = customersOfBranch.get(i);
+            System.out.println("\t Transactions for " + customersOfBranch.get(i).getCustomerName() + ":");
+
+            ArrayList<Double> listOfTransaction = customerOfBranch.getArrayListTransactions();
+            for(int j=0; j< listOfTransaction.size();j++){
+                System.out.println(listOfTransaction.get(j));
+            }
+        }
+    }
+
+    public void executeTransaction (String customerName, double transactionAmmount){
+        if (findCustomer(customerName) != -1) {
+            arrayListCustomers.get(findCustomer(customerName)).addTranscation(transactionAmmount);
+            System.out.println("Transactions on " + transactionAmmount + " has been noted to " + customerName + " account.");
+        } else {
+            System.out.println("Bank account not found.");
+        }
+
+    }
+
+    public void addNewCustomer (String customerName){
+
+        if (findCustomer(customerName) == -1) {
+            arrayListCustomers.add(Customer.createCustomer(customerName));
+            System.out.println("Bank account for " + customerName + " has been added.");
+        }
+        else {
+            System.out.println("Customer already exist");
+        }
+    }
+
+
+    public int findCustomer (String customerName){
+
+        for (int i = 0; i < arrayListCustomers.size(); i++){
+            if (arrayListCustomers.get(i).getCustomerName() == customerName){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public static Branch createBranch(String branchName){
+        return new Branch(branchName);
+    }
+
+    public ArrayList<Customer> getArrayListCustomers() {
+        return arrayListCustomers;
+    }
+}
