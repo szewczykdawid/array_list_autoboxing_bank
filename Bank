@@ -1,0 +1,58 @@
+package com.szewczyk;
+
+
+import java.util.ArrayList;
+
+public class Bank {
+
+    private String bankName;
+    private ArrayList<Branch> arrayListBranches;
+
+    public Bank(String bankName) {
+        this.bankName = bankName;
+        this.arrayListBranches = new ArrayList<Branch>();
+    }
+
+    public Bank(String bankName, ArrayList<Branch> arrayListBranches) {
+        this.bankName = bankName;
+        this.arrayListBranches = arrayListBranches;
+    }
+
+    public void addNewBranch(String branchName){
+        if (findBranch(branchName) == -1){
+            arrayListBranches.add(Branch.createBranch(branchName));
+            System.out.println(branchName + " branch for " + bankName + " has been created.");
+        }
+        else {
+            System.out.println("Branch already exist");
+        }
+    }
+    public int findBranch(String branchName){
+
+        for (int i = 0; i < arrayListBranches.size(); i++){
+            if (arrayListBranches.get(i).getBranchName() == branchName){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public Branch getBranchClass(String branchName){
+
+        for (int i = 0; i < arrayListBranches.size(); i++){
+            if (arrayListBranches.get(i).getBranchName() == branchName){
+                return arrayListBranches.get(i);
+            }
+        }
+        return null;
+    }
+
+
+    public static Bank createBank(String bankName){
+        return new Bank(bankName);
+    }
+
+    public static Bank createBank(String bankName, ArrayList<Branch> arrayListBranches){
+        return new Bank(bankName, arrayListBranches);
+    }
+}
